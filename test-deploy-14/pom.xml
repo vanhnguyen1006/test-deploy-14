@@ -82,10 +82,20 @@
 	<build>
 		<plugins>
 			<plugin>
+
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat8-maven-plugin</artifactId>
+					<version>2.2</version>
+
+
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.1.2</version>
-
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
 				<executions>
 					<execution>
 						<phase>package</phase>
