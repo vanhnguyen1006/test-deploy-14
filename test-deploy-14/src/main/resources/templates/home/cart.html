@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>E-Commerce</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
+<div class="wrapperr">
+    <div class="header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="${'/'}">
+                    <img src="/image/gumi.png" alt="Logo" style="width: 120px; height: 60px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    <!--                    <ul class="navbar-nav m-auto">-->
+                    <!--                        <li class="nav-item m-auto">-->
+                    <!--                            <a class="nav-link" th:href="${'/'}">Trang Chủ</a>-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
+
+                    <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/search/page/1}" method="GET">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" aria-label="Small"
+                                   aria-describedby="inputGroup-sizing-sm" placeholder="Search..." name="search">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary btn-number">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--                        <a class="btn btn-success btn-sm ml-3" href="#">-->
+                        <!--                            <i class="fa fa-shopping-cart"></i> Giỏ-->
+                        <!--                            <span class="badge badge-light"></span>-->
+                        <!--                        </a>-->
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="main">
+        <!-- image quảng cáo -->
+        <section class="jumbotron text-center">
+            <div class="container">
+                <p class="lead text-muted mb-0"></p>
+            </div>
+        </section>
+        <!-- ~~ -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a>Giỏ Hàng</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Hình Ảnh</th>
+                                <th scope="col">Tên Sản Phẩm</th>
+                                <th scope="col">Có Sẵn</th>
+                                <th scope="col" class="text-center">Số lượng</th>
+                                <th scope="col" class="text-right">Giá Tiền</th>
+                                <th> </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><img th:src="${product.getLinkImg()}" style="width:120px;height:120px;"/></td>
+                                <td><a th:text="${product.name}"></a></td>
+                                <td>In stock</td>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
+                                                    data-type="minus" data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="quantity" name="quantity" min="1"
+                                               max="100" value="1">
+                                        <div class="input-group-append">
+                                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
+                                                    data-type="plus" data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right" th:text="${product.price + ' đ'}"></td>
+                                <td class="text-right"><button class="btn btn-sm btn-danger"><i
+                                        class="fa fa-trash"></i> </button> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Sub-Total</td>
+                                <td class="text-right" th:text="${product.price + ' $'}"></td>
+                            </tr>
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Shipping</td>-->
+                            <!--                                <td class="text-right">6,90 €</td>-->
+                            <!--                            </tr>-->
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>Total</strong></td>
+                                <td class="text-right" th:text="${product.price + ' $'}"><strong></strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <div class="row">
+                        <div class="col-sm-12  col-md-6">
+                            <button class="btn btn-block btn-light">Continue Shopping</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 text-right">
+                            <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">Footer</div>
+    <script src="/js/cart.js"></script>
+</div>
+</body>
+
+</html>

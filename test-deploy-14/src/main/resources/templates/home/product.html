@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/product.css">
+
+</head>
+<body>
+<div class="wrapperr">
+    <div class="header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="${'/'}">
+                    <img src="/image/gumi.png" alt="Logo" style="width: 120px; height: 60px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                    <!--                    <ul class="navbar-nav m-auto">-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a class="nav-link" th:href="${'/'}">Trang Chủ</a>-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
+
+                    <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/search/page/1}" method="GET">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" aria-label="Small"
+                                   aria-describedby="inputGroup-sizing-sm" placeholder="Search..." name="search">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary btn-number">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--                        <a class="btn btn-success btn-sm ml-3" href="#">-->
+                        <!--                            <i class="fa fa-shopping-cart"></i> Giỏ-->
+                        <!--                            <span class="badge badge-light"></span>-->
+                        <!--                        </a>-->
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- image quảng cáo -->
+<section class="jumbotron text-center">
+    <div class="container">
+        <p class="lead text-muted mb-0"></p>
+    </div>
+</section>
+<!-- ~~ -->
+<div class="main" >
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="${'/'}">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a th:href="${'/category/' + {product.category.getId()} }" th:text="${product.category.getName()}"></a>
+                        </li>
+                        <li class="breadcrumb-item " aria-current="page" th:text="${product.name}"></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!-- Image -->
+            <div class="col-12 col-lg-6">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <a href="" data-toggle="modal" data-target="#productModal">
+                            <img class="img-fluid" th:src="${product.getLinkImg()}"/>
+                            <p class="text-center">Zoom</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add to cart -->
+            <div class="col-12 col-lg-6 add_to_cart_block">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <p class="price" th:text="${product.name}"></p>
+                        <p class="price" th:text="${product.price + ' đ'}"></p>
+                        <p class="price_discounted">149.90 $</p>
+                        <form method="get" action="cart.html">
+                            <div class="form-group">
+                                <label>Quantity :</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="quantity-left-minus btn btn-danger btn-number"
+                                                data-type="minus" data-field="">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control" id="quantity" name="quantity" min="1"
+                                           max="100" value="1">
+                                    <div class="input-group-append">
+                                        <button type="button" class="quantity-right-plus btn btn-success btn-number"
+                                                data-type="plus" data-field="">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a th:href="${'/cart/' + {product.getId()} }" class="btn btn-success btn-lg btn-block text-uppercase">
+                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                            </a>
+                        </form>
+                        <div class="product_rassurance">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br />Fast delivery
+                                </li>
+                                <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br />Secure
+                                    payment</li>
+                                <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br />+33 1 22 54 65
+                                    60</li>
+                            </ul>
+                        </div>
+                        <div class="reviews_product p-3 mb-2 ">
+                            3 reviews
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            (4/5)
+                            <a class="pull-right" href="#reviews">View all reviews</a>
+                        </div>
+                        <div class="datasheet p-3 mb-2 bg-info text-white">
+                            <a href="" class="text-white"><i class="fa fa-file-text"></i> Download DataSheet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-light mb-3">
+                    <div class="card-header bg-primary text-white text-uppercase"><i
+                            class="fa fa-align-justify"></i> Description</div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en
+                            page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis
+                            les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour
+                            réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq
+                            siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu
+                            n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles
+                            Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion
+                            dans des applications de mise en page de texte, comme Aldus PageMaker.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            Footer
+        </div>
+        <!-- Modal image -->
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel" th:text="${product.name}"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="img-fluid" th:src="${product.getLinkImg()}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/product.js"></script>
+</body>
