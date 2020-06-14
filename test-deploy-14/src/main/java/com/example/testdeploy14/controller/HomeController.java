@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
-@ResponseBody
 public class HomeController {
     @Autowired
     private final ProductService productService;
@@ -29,7 +27,7 @@ public class HomeController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("")
+    @RequestMapping("")
     public String showHomeView(){
         return "redirect:/";
     }
