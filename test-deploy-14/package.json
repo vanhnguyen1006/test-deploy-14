@@ -1,7 +1,7 @@
 {
   "name": "test-deploy-14",
   "version": "0.0.1",
-  "description": "/templates/home/index.html",
+  "description": "Demo project for Spring Boot",
   "main": "/controller/HomeController.java",
   "scripts": {
     "start": "node HomeController.java"
