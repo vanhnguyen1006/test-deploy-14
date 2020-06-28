@@ -1,7 +1,7 @@
 {
   "name": "test-deploy-14",
   "version": "0.0.1",
-  "description": "",
+  "description": "/templates/home/index.html",
   "main": "/controller/HomeController.java",
   "scripts": {
     "start": "node HomeController.java"
