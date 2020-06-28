@@ -31,10 +31,6 @@ public class HomeController extends HttpServlet {
         this.categoryService = categoryService;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.setContentType("/home/index.html");
-    }
 
     @RequestMapping("")
     public String showHomeView(){
