@@ -22,9 +22,9 @@ const serveStatic = require('serve-static');
 const app = express();
 
 app.get("/", function(req, res)){
-    res.render("home/index")
+    res.render("/home/index.html")
 }
 
 app.get("/admin", function(req, red)){
-    res.render("admin/index")
+    res.render("/admin/index.html")
 }
