@@ -2,8 +2,8 @@
   "name": "test-deploy-14",
   "version": "0.0.1",
   "description": "",
-  "main": "app.js",
+  "main": "/controller/HomeController.java",
   "scripts": {
-    "start": "node app.js"
+    "start": "node HomeController.java"
   }
 }
